@@ -201,12 +201,12 @@ export default {
       }
       
       if(this.gameStopped) {
-        console.log('Game stopped')
+        // console.log('Game stopped')
         return
       }
       
       if(this.gameOver) {
-        console.log('Game finished')
+        // console.log('Game finished')
         this.updateGameScore()
         return
       }
@@ -232,7 +232,7 @@ export default {
         }
         
         this.tooglePlayer()
-        console.log('Skip ' + this.playerSymbol)
+        // console.log('Skip ' + this.playerSymbol)
         if(!(this.skipWhite && this.skipBlack)) {
           this.fetchPlay()
         }
@@ -275,6 +275,7 @@ export default {
         this.fetchPlay()
       })
       .catch(function (error) {
+        // eslint-disable-next-line
         console.log(error);
       });
     },
