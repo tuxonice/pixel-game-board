@@ -61,9 +61,8 @@
   </div>
 </template>
 <script>
-  
 import Grid from './Grid.vue'  
-  
+
 export default {
   name: 'Wrapper',
   components: {
@@ -82,20 +81,20 @@ export default {
       matchCount: 0,
       blackWinCount: 0,
       whiteWinCount: 0,
-      blackEndPoint: process.env.VUE_APP_AI_ENDPOINT_BLACK,
-      whiteEndPoint: process.env.VUE_APP_AI_ENDPOINT_WHITE
+      blackEndPoint: process.env.VUE_APP_AI_ENDPOINT_BLACK || '',
+      whiteEndPoint: process.env.VUE_APP_AI_ENDPOINT_WHITE || ''
     }
   },
   computed: {
-    blackWinRate: function () {
+    blackWinRate() {
       return this.matchCount === 0 ? '0' : Number.parseFloat(((this.blackWinCount / this.matchCount) * 100)).toFixed(2)
     },
-    whiteWinRate: function () {
+    whiteWinRate() {
       return this.matchCount === 0 ? '0' : Number.parseFloat(((this.whiteWinCount / this.matchCount) * 100)).toFixed(2)
     }
   },
   methods: {
-    onUpdateChild (value) {
+    onUpdateChild(value) {
       this.lastPlayWhite = value.lastPlayWhite
       this.lastPlayBlack = value.lastPlayBlack
       this.piecesBlack = value.piecesBlack
@@ -103,7 +102,7 @@ export default {
       this.statusWhite = value.statusWhite
       this.statusBlack = value.statusBlack
     },
-    onUpdateHistory (value) {
+    onUpdateHistory(value) {
       this.matchCount++;
       this.historyBlack = "Match " + this.matchCount + ": " + value.historyBlack + "\n" + this.historyBlack
       this.historyWhite = "Match " + this.matchCount + ": " + value.historyWhite + "\n" + this.historyWhite

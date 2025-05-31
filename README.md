@@ -1,29 +1,29 @@
 # Pixel Game Board
 
+A Vue 3 application for playing Reversi (Othello) with AI agents.
+
 ## Project setup
 ```
-npm install
+yarn install
 ```
 
 ### Compiles and hot-reloads for development
 ```
-npm run serve
+yarn serve
 ```
 
 ### Compiles and minifies for production
 ```
-npm run build
-```
-
-### Run your tests
-```
-npm run test
+yarn build
 ```
 
 ### Lints and fixes files
 ```
-npm run lint
+yarn lint
 ```
+
+## Important Note
+This project uses Yarn package manager instead of npm to properly handle dependency resolutions for security vulnerabilities. Please continue using Yarn for all package management operations.
 
 ### Customize configuration
 See [Configuration Reference](https://cli.vuejs.org/config/).

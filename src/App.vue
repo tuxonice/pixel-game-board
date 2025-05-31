@@ -8,7 +8,7 @@
 import Wrapper from './components/Wrapper'
 
 export default {
-  name: 'app',
+  name: 'App',
   components: {
     Wrapper
   }

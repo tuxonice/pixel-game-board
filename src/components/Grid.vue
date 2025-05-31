@@ -4,16 +4,20 @@
       <div class="col-md">    
         <div class="board">
           <table>
-            <tr>
-              <td class="no-border-col no-border-row"></td>
-              <td class="no-border-col" v-for="(row, rowIndex) in rows" :key="rowIndex">{{row + 1}}</td>
-            </tr>
-            <tr v-for="(row, rowIndex) in rows" :key="rowIndex">
-              <td class="no-border-row">{{ String.fromCharCode(65 + row) }}</td>
-              <td v-for="(col, colIndex) in cols" :key="colIndex" :class="currentBoard[rowIndex][colIndex]">
-                <span :class="currentBoard[rowIndex][colIndex]"></span>
-              </td>
-            </tr>
+            <thead>
+              <tr>
+                <th class="no-border-col no-border-row"></th>
+                <th class="no-border-col" v-for="(row, rowIndex) in rows" :key="rowIndex">{{row + 1}}</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr v-for="(row, rowIndex) in rows" :key="rowIndex">
+                <td class="no-border-row">{{ String.fromCharCode(65 + row) }}</td>
+                <td v-for="(col, colIndex) in cols" :key="colIndex" :class="currentBoard[rowIndex][colIndex]">
+                  <span :class="currentBoard[rowIndex][colIndex]"></span>
+                </td>
+              </tr>
+            </tbody>
           </table>
         </div>
       </div>
@@ -30,7 +34,6 @@
   </div>
 </template>
 <script>
-
 import axios from 'axios'
 import Reversi from '../Reversi'
   
@@ -248,12 +251,13 @@ export default {
       })
       .then((response) => {
         this.clearAvailablePositions()
-        this.$set(this.currentBoard[response.data.x], response.data.y, this.playerSymbol)
+        // In Vue 3, direct assignment is reactive for arrays
+        this.currentBoard[response.data.x][response.data.y] = this.playerSymbol
         
         availablePositions.forEach((position) => {
           if(position.x === response.data.x && position.y === response.data.y) {
               position.positions.forEach((coords) => {
-                  this.$set(this.currentBoard[coords[0]], coords[1], this.playerSymbol)
+                  this.currentBoard[coords[0]][coords[1]] = this.playerSymbol
               })
           }
         })
