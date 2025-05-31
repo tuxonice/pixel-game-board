@@ -174,7 +174,8 @@ export default {
     showAvailablePositions() {
       let availablePositions = this.game.getPositionsToPlay(this.currentBoard, this.playerSymbol, this.opponentSymbol)
       availablePositions.forEach((position) => {
-        this.$set(this.currentBoard[position.x], position.y, 'r')
+        // Direct assignment in Vue 3 is reactive
+        this.currentBoard[position.x][position.y] = 'r'
       })
       
       return availablePositions;
@@ -183,7 +184,8 @@ export default {
       for (let i=0; i<=7; i++) {
         for (let j=0; j<=7; j++) {
           if(this.currentBoard[i][j] === 'r') {
-              this.$set(this.currentBoard[i], j, '')
+              // Direct assignment in Vue 3 is reactive
+              this.currentBoard[i][j] = ''
           }
         }
       }
