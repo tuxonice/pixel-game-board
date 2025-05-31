@@ -24,7 +24,17 @@
           <textarea class="form-control" id="history-black" rows="10" v-model="historyBlack"></textarea>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="blackEndPoint" placeholder="Player 1 endpoint" v-model="blackEndPoint">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <select class="form-control" v-model="blackStrategy" @change="onBlackStrategyChange">
+                <option value="">Custom Endpoint</option>
+                <option value="corner-domination">Corner Domination</option>
+                <option value="mobility-control">Mobility Control</option>
+                <option value="minimax">Minimax</option>
+              </select>
+            </div>
+            <input type="text" class="form-control" id="blackEndPoint" placeholder="Player 1 endpoint" v-model="blackEndPoint">
+          </div>
         </div>
       </div>
       <div class="col-md">
@@ -54,7 +64,17 @@
           <textarea class="form-control" id="history-white" rows="10" v-model="historyWhite"></textarea>
         </div>
         <div class="form-group">
-          <input type="text" class="form-control" id="whiteEndPoint" placeholder="Player 2 endpoint" v-model="whiteEndPoint">
+          <div class="input-group mb-3">
+            <div class="input-group-prepend">
+              <select class="form-control" v-model="whiteStrategy" @change="onWhiteStrategyChange">
+                <option value="">Custom Endpoint</option>
+                <option value="corner-domination">Corner Domination</option>
+                <option value="mobility-control">Mobility Control</option>
+                <option value="minimax">Minimax</option>
+              </select>
+            </div>
+            <input type="text" class="form-control" id="whiteEndPoint" placeholder="Player 2 endpoint" v-model="whiteEndPoint">
+          </div>
         </div>
       </div>
     </div>
@@ -82,7 +102,10 @@ export default {
       blackWinCount: 0,
       whiteWinCount: 0,
       blackEndPoint: process.env.VUE_APP_AI_ENDPOINT_BLACK || '',
-      whiteEndPoint: process.env.VUE_APP_AI_ENDPOINT_WHITE || ''
+      whiteEndPoint: process.env.VUE_APP_AI_ENDPOINT_WHITE || '',
+      blackStrategy: '',
+      whiteStrategy: '',
+      baseApiUrl: 'http://localhost:3000'
     }
   },
   computed: {
@@ -112,6 +135,22 @@ export default {
       if(this.piecesBlack < this.piecesWhite) {
           this.whiteWinCount++
       }
+    },
+    onBlackStrategyChange() {
+      if (this.blackStrategy) {
+        this.blackEndPoint = `${this.baseApiUrl}/${this.blackStrategy}`;
+      } else {
+        // Clear the input when selecting Custom Endpoint
+        this.blackEndPoint = '';
+      }
+    },
+    onWhiteStrategyChange() {
+      if (this.whiteStrategy) {
+        this.whiteEndPoint = `${this.baseApiUrl}/${this.whiteStrategy}`;
+      } else {
+        // Clear the input when selecting Custom Endpoint
+        this.whiteEndPoint = '';
+      }
     }
   }
 }
@@ -136,5 +175,17 @@ h4 > span.white {
   background-color: #FFF;
   border: 1px solid #000;
   margin-bottom: -5px;
+}
+
+.input-group-prepend {
+  margin-right: 5px;
+}
+
+#blackEndPoint {
+  border-radius:.25rem;
+}
+
+#whiteEndPoint {
+  border-radius:.25rem;
 }
 </style>

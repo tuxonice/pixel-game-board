@@ -25,8 +25,8 @@
     <div class="row">
       <div class="col-md mt-4">
         <div class="mx-auto" style="width: 350px;">
-          <!-- <button type="button" class="btn btn-primary" @click="stopPlay()">Stop Game</button>&nbsp; -->
-          <!-- <button type="button" class="btn btn-primary" @click="startPlay()">Start Game</button>&nbsp; -->
+          <button type="button" class="btn btn-primary" @click="stopPlay()">Stop Game</button>&nbsp;
+          <button type="button" class="btn btn-primary" @click="startPlay()">Start Game</button>&nbsp;
           <button v-if="gameOver" type="button" class="btn btn-primary" @click="resetGame()">Play Again</button>
         </div>
       </div>
